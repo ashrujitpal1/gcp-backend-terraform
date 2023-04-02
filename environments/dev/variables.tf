@@ -11,7 +11,7 @@ variable "app_domain" {
     default = "ashrujit-gcp.com" 
 }
 variable "app_node_count" {
-    type = int
+    type = number
     default = 2 
 }
 variable "gcp_region_1" {
