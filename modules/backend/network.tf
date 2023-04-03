@@ -9,11 +9,10 @@ resource "google_compute_network" "vpc" {
 
 # create private subnet
 resource "google_compute_subnetwork" "private_subnet_1" {
-  provider      = "google-beta"
   purpose       = "PRIVATE"
   name          = "${var.app_name}-${var.app_environment}-private-subnet-1"
   ip_cidr_range = var.private_subnet_cidr_1
-  network       = google_compute_network.vpc.name
+  network       = "${google_compute_network.vpc.id}"
   region        = var.gcp_region_1
 }
 
@@ -27,7 +26,7 @@ resource "google_compute_address" "nat_ip" {
 # create a nat to allow private instances connect to internet
 resource "google_compute_router" "nat-router" {
   name    = "${var.app_name}-${var.app_environment}-nat-router"
-  network = google_compute_network.vpc.name
+  network = "${google_compute_network.vpc.id}"
 }
 
 resource "google_compute_router_nat" "nat-gateway" {
@@ -47,7 +46,7 @@ output "nat_ip_address" {
 # allow internal icmp
 resource "google_compute_firewall" "allow-internal" {
   name    = "${var.app_name}-${var.app_environment}-fw-allow-internal"
-  network = "${google_compute_network.vpc.name}"
+  network = "${google_compute_network.vpc.id}"
   allow {
     protocol = "icmp"
   }

@@ -21,8 +21,8 @@ resource "google_compute_instance_template" "web_server" {
   }
 
   network_interface {
-    network    = google_compute_network.vpc.name
-    subnetwork = google_compute_subnetwork.private_subnet_1.name
+    network    = "${google_compute_network.vpc.id}"
+    subnetwork = "${google_compute_subnetwork.private_subnet_1.id}"
   }
 
   lifecycle {
