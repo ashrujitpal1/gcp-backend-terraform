@@ -48,7 +48,7 @@ steps:
       fi 
 # [START tf-plan]
 - id: 'tf plan'
-  name: 'hashicorp/terraform:1.1.9'
+  name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
   - '-c'
