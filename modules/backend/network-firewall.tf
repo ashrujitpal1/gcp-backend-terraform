@@ -9,7 +9,7 @@ resource "google_compute_firewall" "allow-http" {
     ports    = ["80"]
   }
   target_tags = ["http"] 
-  source_tags = ["http"] 
+  source_tags = ["0.0.0.0/0"] 
 }
 
 # allow https
@@ -21,7 +21,7 @@ resource "google_compute_firewall" "allow-https" {
     ports    = ["443"]
   }
   target_tags = ["https"]
-  source_tags = ["https"] 
+  source_tags = ["0.0.0.0/0"] 
 }
 
 # allow ssh
